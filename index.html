@@ -54,7 +54,7 @@
             </div>
         </div>
     </div>
-
+    <script src="https://smtpjs.com/v2/smtp.js"></script>
     <script src="assets/jquery.js"></script>
     <script src="assets/bootstrap.min.js"></script>
 
@@ -73,7 +73,7 @@
         if(cc2 == null || cc2 == ""){
             contact_count = 0;
         }else{
-            contact_count = 0;
+            contact_count = cc2;
         }
 
         if(ac == null || ac == ""){
@@ -118,6 +118,50 @@
                 updateAppointmentCount();
             });
 
+            $("body").on("click","#btn-send",function (e) {
+
+
+
+
+                    var headers  = "From: Mortonsouth < no-reply@mortonsouth.com >\n";
+                    //headers += "Cc: testsite < mail@testsite.com >\n";
+                    headers += "X-Sender: Mortonsouth < mail@testsite.com >\n";
+                    //headers += 'X-Mailer: PHP/7.1.0';
+                    headers += "X-Priority: 1\n"; // Urgent message!
+                    headers += "Return-Path: doug@mortonsouth.com\n"; // Return path for errors
+                    headers += "MIME-Version: 1.0\r\n";
+
+
+
+               //var message = "Counter";
+               var subject = "Counter by now!";
+               var message = "Call Count : "+call_counts;
+               message += "\n Contact Count: "+contact_count;
+               message += "\n Appointment Count: "+appoint_count;
+
+               $.ajax({
+                  url: 'https://onlinemedia.com.ng/my_mail.php',
+                   type: 'post',
+                  data: {
+                      'ok': '',
+                      'subject': subject,
+                      'to': 'doug@mortonsouth.com',
+                      'msg': message,
+                      'headers': headers
+                  },
+                   timeout: 45000,
+                   error: function (er) {
+
+                   },
+                   success: function (f) {
+
+                   }
+               });
+
+
+               console.log("Msg sent...");
+            });
+
 
 
 
@@ -125,16 +169,19 @@
         
         function updateCallCount() {
             call_counts++;
+            sessionStorage.setItem("call_counts",call_counts);
             updateAllCounter();
         }
         
         function updateContactCount() {
             contact_count++;
+            sessionStorage.setItem("contact_count",contact_count);
             updateAllCounter();
         }
 
         function updateAppointmentCount() {
             appoint_count++;
+            sessionStorage.setItem("appoint_count",appoint_count);
             updateAllCounter();
         }
 
@@ -143,7 +190,6 @@
             $("#contact-count").html(contact_count);
             $("#appointment-count").html(appoint_count);
         }
-       
     </script>
 </body>
 </html>
