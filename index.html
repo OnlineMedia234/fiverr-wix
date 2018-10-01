@@ -33,9 +33,9 @@
 
         <div class="row">
             <div class="col-md-12 text-center">
-                <input type="button" class="btn btn-config btn-lg" value="Call Counts">
-                <input type="button" class="btn btn-config btn-lg" value="Contacts">
-                <input type="button" class="btn btn-config btn-lg" value="Appointment">
+                <button type="button" class="btn btn-config btn-lg" id="btn-call" value=""><span>Call Counts</span> <span class="badge" id="call-count"></span></button>
+                <button type="button" class="btn btn-config btn-lg" id="btn-contact" value=""><span>Contacts</span> <span class="badge" id="contact-count"></span></button>
+                <button type="button" class="btn btn-config btn-lg" id="btn-appoint" value=""><span>Appointment</span> <span class="badge" id="appointment-count"></span></button>
             </div>
 
         </div>
@@ -46,10 +46,10 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <div class="col-sm-6">
-                    <input type="button" class="btn btn-config btn-lg btn-block" value="Reset Counter">
+                    <input type="button" class="btn btn-config btn-lg btn-block" id="btn-reset" value="Reset Count">
                 </div>
                 <div class="col-sm-6">
-                    <input type="button" class="btn btn-config btn-lg btn-block" value="Send Count">
+                    <input type="button" class="btn btn-config btn-lg btn-block" id="btn-send" value="Send Count">
                 </div>
             </div>
         </div>
@@ -59,6 +59,28 @@
     <script src="assets/bootstrap.min.js"></script>
 
     <script type="text/javascript">
+        var call_counts,contact_count,appoint_count;
+        var cc = sessionStorage.getItem("call_counts");
+        var cc2 = sessionStorage.getItem("contact_count");
+        var ac = sessionStorage.getItem("appoint_count");
+
+        if(cc == null || cc == ""){
+            call_counts = 0;
+        }else{
+            call_counts = cc;
+        }
+
+        if(cc2 == null || cc2 == ""){
+            contact_count = 0;
+        }else{
+            contact_count = 0;
+        }
+
+        if(ac == null || ac == ""){
+            appoint_count = 0;
+        }else{
+            appoint_count = ac;
+        }
         var $ = jQuery;
         $(document).ready(function () {
             var d = new Date();
@@ -69,7 +91,58 @@
             var theDate = month +"/"+day+"/"+year;
 
             $("#theDate").html(theDate);
+
+            updateAllCounter();
+
+            $("body").on("click","#btn-reset",function (e) {
+               if(confirm("Are you sure you want to reset the count?") == true){
+                   sessionStorage.clear();
+                   call_counts = 0;
+                   contact_count = 0;
+                   appoint_count = 0;
+
+                   updateAllCounter();
+               }
+            });
+
+            $("body").on("click","#btn-call",function (e) {
+                updateCallCount();
+            });
+
+
+            $("body").on("click","#btn-contact",function (e) {
+                updateContactCount();
+            });
+
+            $("body").on("click","#btn-appoint",function (e) {
+                updateAppointmentCount();
+            });
+
+
+
+
         });
+        
+        function updateCallCount() {
+            call_counts++;
+            updateAllCounter();
+        }
+        
+        function updateContactCount() {
+            contact_count++;
+            updateAllCounter();
+        }
+
+        function updateAppointmentCount() {
+            appoint_count++;
+            updateAllCounter();
+        }
+
+        function updateAllCounter() {
+            $("#call-count").html(call_counts);
+            $("#contact-count").html(contact_count);
+            $("#appointment-count").html(appoint_count);
+        }
     </script>
 </body>
 </html>
