@@ -5,6 +5,20 @@
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/bootstrap.css">
+
+    <style type="text/css">
+        .btn-config{
+            background-color: #393e44;
+            color: #fff;
+            padding: 10px;
+            border-color: transparent;
+        }
+
+        .btn-config:hover, .btn-config:active, .btn-config:focus{
+            color: #fff;
+            background-color: #393a44;
+        }
+    </style>
 </head>
 <body>
 
@@ -18,16 +32,10 @@
         <br><br>
 
         <div class="row">
-            <div class="col-md-4">
-                <input type="button" class="btn btn-block btn-default btn-lg" value="Call Counts">
-            </div>
-
-            <div class="col-md-4">
-                <input type="button" class="btn btn-block btn-default btn-lg" value="Contacts">
-            </div>
-
-            <div class="col-md-4">
-                <input type="button" class="btn btn-block btn-default btn-lg" value="Contacts">
+            <div class="col-md-12 text-center">
+                <input type="button" class="btn btn-config btn-lg" value="Call Counts">
+                <input type="button" class="btn btn-config btn-lg" value="Contacts">
+                <input type="button" class="btn btn-config btn-lg" value="Appointment">
             </div>
         </div>
     </div>
