@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/bootstrap.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center" id="theDate"></h1>
+            </div>
+        </div>
+
+        <br><br>
+
+        <div class="row">
+            <div class="col-md-4">
+                <input type="button" class="btn btn-block btn-default btn-lg" value="Call Counts">
+            </div>
+
+            <div class="col-md-4">
+                <input type="button" class="btn btn-block btn-default btn-lg" value="Contacts">
+            </div>
+
+            <div class="col-md-4">
+                <input type="button" class="btn btn-block btn-default btn-lg" value="Contacts">
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/jquery.js"></script>
+    <script src="assets/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        var $ = jQuery;
+        $(document).ready(function () {
+            var d = new Date();
+            var day = d.getDate();
+            var month = d.getMonth() + 1;
+            var year = d.getFullYear();
+
+            var theDate = month +"/"+day+"/"+year;
+
+            $("#theDate").html(theDate);
+        });
+    </script>
+</body>
+</html>
